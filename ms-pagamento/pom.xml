@@ -8,11 +8,11 @@
 		<version>3.4.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.github.yasminmiguez</groupId>
+	<groupId>com.github.ariadineamaral</groupId>
 	<artifactId>ms-pagamento</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ms-pagamento</name>
-	<description>Microsservice de pagamento </description>
+	<description>Microsserviço de pagamentos</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -76,6 +76,7 @@
 						<path>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
+							<version>1.18.34</version>
 						</path>
 					</annotationProcessorPaths>
 				</configuration>
