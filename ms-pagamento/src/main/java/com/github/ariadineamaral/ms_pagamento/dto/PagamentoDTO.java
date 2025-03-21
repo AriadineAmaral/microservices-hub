@@ -1,5 +1,6 @@
 package com.github.ariadineamaral.ms_pagamento.dto;
 
+import com.github.ariadineamaral.ms_pagamento.entity.Pagamento;
 import com.github.ariadineamaral.ms_pagamento.entity.Status;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -43,4 +44,16 @@ public class PagamentoDTO {
     @NotNull(message = "A forma de pagamento obrigatória")
     private Long formaDePagamentoId;
 
+
+    public PagamentoDTO(Pagamento entity) {
+        valor = entity.getValor();
+        nome = entity.getNome();
+        id = entity.getId();
+        numeroDoCartao = entity.getNumeroDoCartao();
+        validade = entity.getValidade();
+        codigoDeSeguranca = entity.getCodigoDeSeguranca();
+        status = entity.getStatus();
+        pedidoId = entity.getPedidoId();
+        formaDePagamentoId = entity.getFormaDePagamentoId();
+    }
 }
