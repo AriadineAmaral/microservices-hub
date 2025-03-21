@@ -1,9 +1,8 @@
 package com.github.ariadineamaral.ms_pagamento.controller.handlers;
 
-import br.com.fiap.ms_produto.controller.handlers.dto.CustomErrorDTO;
-import br.com.fiap.ms_produto.controller.handlers.dto.ValidationErrorDTO;
-import br.com.fiap.ms_produto.service.exceptions.DataBaseException;
-import br.com.fiap.ms_produto.service.exceptions.ResourceNotFoundException;
+import com.github.ariadineamaral.ms_pagamento.controller.handlers.dto.CustomErrorDTO;
+import com.github.ariadineamaral.ms_pagamento.controller.handlers.dto.ValidationErrorDTO;
+import com.github.ariadineamaral.ms_pagamento.service.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,14 +40,14 @@ public class ControllerExceptionHandler {
         return ResponseEntity.status(status).body(err);
     }
 
-    @ExceptionHandler(DataBaseException.class)
-    public ResponseEntity<CustomErrorDTO> handleDatabase(DataBaseException e, HttpServletRequest request) {
-        HttpStatus status = HttpStatus.BAD_REQUEST;
-
-        CustomErrorDTO err = new CustomErrorDTO(Instant.now(), status.value(),
-                e.getMessage(), request.getRequestURI());
-
-        return ResponseEntity.status(status).body(err);
-    }
+//    @ExceptionHandler(DataBaseException.class)
+//    public ResponseEntity<CustomErrorDTO> handleDatabase(DataBaseException e, HttpServletRequest request) {
+//        HttpStatus status = HttpStatus.BAD_REQUEST;
+//
+//        CustomErrorDTO err = new CustomErrorDTO(Instant.now(), status.value(),
+//                e.getMessage(), request.getRequestURI());
+//
+//        return ResponseEntity.status(status).body(err);
+//    }
 
 }

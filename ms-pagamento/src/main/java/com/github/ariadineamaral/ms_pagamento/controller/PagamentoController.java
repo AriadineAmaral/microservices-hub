@@ -4,10 +4,15 @@ package com.github.ariadineamaral.ms_pagamento.controller;
 import com.github.ariadineamaral.ms_pagamento.dto.PagamentoDTO;
 import com.github.ariadineamaral.ms_pagamento.entity.Pagamento;
 import com.github.ariadineamaral.ms_pagamento.service.PagamentoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -31,6 +36,19 @@ public class PagamentoController {
     return ResponseEntity.ok(dto);
     }
 
+
+    @PostMapping
+    public ResponseEntity<PagamentoDTO> create (@RequestBody @Valid PagamentoDTO dto) {
+        dto = service.createPagamento(dto);
+
+        URI uri = ServletUriComponentsBuilder
+                .fromCurrentRequestUri()
+                .path("/{id}")
+                .buildAndExpand(dto.getId())
+                .toUri();
+        return ResponseEntity.created(uri).body(dto);
+
+    }
 
 
 }

@@ -3,6 +3,7 @@ package com.github.ariadineamaral.ms_pagamento.service;
 
 import com.github.ariadineamaral.ms_pagamento.dto.PagamentoDTO;
 import com.github.ariadineamaral.ms_pagamento.entity.Pagamento;
+import com.github.ariadineamaral.ms_pagamento.entity.Status;
 import com.github.ariadineamaral.ms_pagamento.repository.PagamentoRepository;
 import com.github.ariadineamaral.ms_pagamento.service.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +32,26 @@ public class PagamentoService {
         );
         return new PagamentoDTO(entity);
         }
+
+
+        @Transactional
+        public PagamentoDTO createPagamento(PagamentoDTO dto){
+        Pagamento entity = new Pagamento();
+        copyDtoEntity(dto, entity);
+        entity.setStatus(Status.CRIADO);
+        entity = repository.save(entity);
+        return new PagamentoDTO(entity);
+        }
+
+    private void copyDtoEntity(PagamentoDTO dto, Pagamento entity) {
+
+        entity.setValor(dto.getValor());
+        entity.setNome(dto.getNome());
+        entity.setNumeroDoCartao(dto.getNumeroDoCartao());
+        entity.setValidade(dto.getValidade());
+        entity.setCodigoDeSeguranca(dto.getCodigoDeSeguranca());
+        entity.setPedidoId(dto.getPedidoId());
+        entity.setFormaDePagamentoId(dto.getFormaDePagamentoId());
     }
+}
 
