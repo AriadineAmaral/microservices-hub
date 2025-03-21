@@ -29,7 +29,7 @@ public class PagamentoDTO {
     @Size(min = 16, max = 19, message = "Número do cartao deve ter entre 16 e 19 caracteres")
     private String numeroDoCartao;
 
-    @Size(min = 5, max = 3, message = "A validade do cartao deve ter 5 caracteres")
+    @Size(min = 5, max = 5, message = "A validade do cartao deve ter 5 caracteres")
     private String validade;
 
     @Size(min = 3, max = 3, message = "o código de sergurança do cartao deve ter 3 caracteres")
