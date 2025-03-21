@@ -26,19 +26,7 @@ public class ControllerExceptionHandler {
         return ResponseEntity.status(status).body(err);
     }
 
-//    @ExceptionHandler(MethodArgumentNotValidException.class)
-//    public ResponseEntity<CustomErrorDTO> methodArgumentNotValidtion(MethodArgumentNotValidException e,
-//                                                                     HttpServletRequest request) {
-//        HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
-//        ValidationErrorDTO err = new ValidationErrorDTO(Instant.now(), status.value(),
-//                "Dados Inválidos", request.getRequestURI());
-//
-//        for(FieldError fieldError : e.getBindingResult().getFieldErrors()){
-//            err.addError(fieldError.getField(), fieldError.getDefaultMessage());
-//        }
-//
-//        return ResponseEntity.status(status).body(err);
-//    }
+
 
 //    @ExceptionHandler(DataBaseException.class)
 //    public ResponseEntity<CustomErrorDTO> handleDatabase(DataBaseException e, HttpServletRequest request) {
