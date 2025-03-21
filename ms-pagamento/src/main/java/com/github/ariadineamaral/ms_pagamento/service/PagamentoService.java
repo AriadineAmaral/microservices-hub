@@ -67,5 +67,13 @@ public class PagamentoService {
             throw new ResourceNotFoundException("Recurso não encontrado. Id:" + id);
         }
     }
+
+    @Transactional
+    public void  deletePagamento (Long id) {
+        if (!repository.existsById(id)){
+            throw new ResourceNotFoundException("Recurso não encontrado. ID:" + id);
+        }
+        repository.deleteById(id);
+    }
 }
 
