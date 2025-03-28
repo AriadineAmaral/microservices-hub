@@ -50,4 +50,16 @@ public class PagamentoRepositoryTest {
     }
 
 
+    @Test
+    public void givenANonExistingId_whenCallFindById_thenReturnNonEmptyOptional() {
+        Optional<Pagamento> result = repository.findById(existingId);
+        Assertions.assertTrue(result.isPresent());
+    }
+
+    @Test
+    public void givenANonExistingId_whenCallFindById_thenReturnAnEmptyOptional() {
+        Optional<Pagamento> result = repository.findById(existingId);
+        Assertions.assertFalse(result.isPresent());
+    }
+
 }
