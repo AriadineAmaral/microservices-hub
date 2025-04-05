@@ -84,7 +84,7 @@ public class PagamentoServiceTest {
     }
 
     @Test
-    public void getByIdShouldReturnPagamentoDTOWhenIdDoesNotExist() {
+    public void getByIdShouldReturnResourceNotFoundExceptionWhenIdDoesNotExist() {
         Assertions.assertThrows(ResourceNotFoundException.class,
                 () -> {
                     service.getById(nonExistingId);
@@ -110,7 +110,7 @@ public class PagamentoServiceTest {
     }
 
     @Test
-    public void updatPagamentoShouldReturnResourceNotFoundExceptionWhenIdDoesNotExist() {
+    public void updatePagamentoShouldReturnResourceNotFoundExceptionWhenIdDoesNotExist() {
         Assertions.assertThrows(ResourceNotFoundException.class,
                 () -> {
                     service.updateProduto(nonExistingId, pagamentoDTO);
