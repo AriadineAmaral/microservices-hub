@@ -52,7 +52,7 @@ public class PagamentoController {
 
     @PutMapping("/{id}")
     public ResponseEntity<PagamentoDTO> update(@PathVariable Long id, @Valid @RequestBody PagamentoDTO dto) {
-        dto = service.updateProduto(id, dto);
+        dto = service.updatePagamento(id, dto);
         return ResponseEntity.ok(dto);
     }
 

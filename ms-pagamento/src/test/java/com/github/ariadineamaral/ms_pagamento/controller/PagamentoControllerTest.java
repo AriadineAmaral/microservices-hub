@@ -24,10 +24,10 @@ import java.awt.*;
 import java.net.URI;
 import java.util.List;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.mockito.ArgumentMatchers.any;
@@ -60,6 +60,12 @@ public class PagamentoControllerTest {
         Mockito.when(service.getById(existingId)).thenReturn(dto);
         Mockito.when(service.getById(nonExistisId)).thenThrow(ResourceNotFoundException.class);
         Mockito.when(service.createPagamento(any())).thenReturn(dto);
+        Mockito.when(service.updatePagamento(eq(existingId), any())).thenReturn(dto);
+        Mockito.when(service.updatePagamento(eq(nonExistisId), any())).thenThrow(ResourceNotFoundException.class);
+        Mockito.doNothing().when(service).deletePagamento(existingId);
+        Mockito.doThrow(ResourceNotFoundException.class).when(service).deletePagamento(nonExistisId);
+
+
     }
 
     @Test
@@ -72,7 +78,7 @@ public class PagamentoControllerTest {
 
     @Test
     public void getByIdShouldReturnPagamentoDTOWhenIdExist() throws Exception {
-        ResultActions result = mockMvc.perform(get("/pagamentos/{id}").accept(MediaType.APPLICATION_JSON));
+        ResultActions result = mockMvc.perform(get("/pagamentos/{id}", existingId).accept(MediaType.APPLICATION_JSON));
         result.andExpect(status().isOk());
         result.andExpect(jsonPath("$.id").exists());
         result.andExpect(jsonPath("$.valor").exists());
@@ -117,5 +123,55 @@ public class PagamentoControllerTest {
                 .andExpect(jsonPath("$.formaDePagamentoId").exists());
 
     }
+
+    @Test
+    public void updatePagamentoShouldReturnPagamentoDTOWhenIdExist() throws Exception {
+        String jsonRequestBody = objectMapper.writeValueAsString(dto);
+        mockMvc.perform(put("/pagamentos/{id}", existingId)
+                        .content(jsonRequestBody)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").exists())
+                .andExpect(jsonPath("$.valor").exists())
+                .andExpect(jsonPath("$.status").exists())
+                .andExpect(jsonPath("$.pedidoId").exists())
+                .andExpect(jsonPath("$.formaDePagamentoId").exists());
+
+    }
+
+
+    @Test
+    public void updatePagamentoShouldReturnPagamentoDTOWhenIdDoesNotExist() throws Exception {
+        String jsonRequestBody = objectMapper.writeValueAsString(dto);
+        mockMvc.perform(put("/pagamentos/{id}", nonExistisId)
+                        .content(jsonRequestBody)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isNotFound());
+
+    }
+
+    @Test
+    public void deletePagamentoShouldReturnPagamentoDTOWhenIdExist() throws Exception {
+        mockMvc.perform(delete("/pagamentos/{id}", existingId)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isNoContent());
+
+    }
+
+    @Test
+    public void deletePagamentoShouldReturnPagamentoDTOWhenIdDoesNotExist() throws Exception {
+        mockMvc.perform(delete("/pagamentos/{id}", nonExistisId)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isNotFound());
+
+    }
+
+
 
 }

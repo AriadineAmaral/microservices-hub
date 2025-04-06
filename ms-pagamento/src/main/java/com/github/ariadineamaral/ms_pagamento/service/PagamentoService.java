@@ -56,7 +56,7 @@ public class PagamentoService {
     }
 
     @Transactional
-    public PagamentoDTO updateProduto(Long id, PagamentoDTO dto){
+    public PagamentoDTO updatePagamento(Long id, PagamentoDTO dto){
         try {
             Pagamento entity = repository.getReferenceById(id);
             copyDtoEntity(dto,entity);

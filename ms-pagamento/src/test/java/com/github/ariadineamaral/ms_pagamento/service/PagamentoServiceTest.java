@@ -103,7 +103,7 @@ public class PagamentoServiceTest {
 
     @Test
     public void updatePagamentoShouldReturnPagamentoDTOWhenIdExist(){
-        PagamentoDTO dto = service.updateProduto(pagamento.getId(),pagamentoDTO);
+        PagamentoDTO dto = service.updatePagamento(pagamento.getId(),pagamentoDTO);
         Assertions.assertNotNull(dto);
         Assertions.assertEquals(dto.getId(), existingId);
         Assertions.assertEquals(dto.getValor(), pagamento.getValor());
@@ -113,7 +113,7 @@ public class PagamentoServiceTest {
     public void updatePagamentoShouldReturnResourceNotFoundExceptionWhenIdDoesNotExist() {
         Assertions.assertThrows(ResourceNotFoundException.class,
                 () -> {
-                    service.updateProduto(nonExistingId, pagamentoDTO);
+                    service.updatePagamento(nonExistingId, pagamentoDTO);
                 }
         );
 
