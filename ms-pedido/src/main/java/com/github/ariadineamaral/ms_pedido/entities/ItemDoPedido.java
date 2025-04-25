@@ -22,6 +22,6 @@ public class ItemDoPedido {
     private Integer quatidade;
     private String descricao;
     private BigDecimal valorUnitario;
-    
+
 
 }
