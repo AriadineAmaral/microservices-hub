@@ -60,6 +60,7 @@ public class PagamentoControllerIT {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("id").value(1))
+                .andExpect(jsonPath("id").exists())
                 .andExpect(jsonPath("nome").isString())
                 .andExpect(jsonPath("nome").value("Yasmin Chiquinha"))
                 .andExpect(jsonPath("status").value("CRIADO"));
