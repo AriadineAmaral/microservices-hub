@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -23,4 +25,8 @@ public class Pedido {
     private LocalDate data;
     @Enumerated(EnumType.STRING)
     private Status status;
+
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.PERSIST)
+    private List<ItemDoPedido> items = new ArrayList<>();
+
 }
