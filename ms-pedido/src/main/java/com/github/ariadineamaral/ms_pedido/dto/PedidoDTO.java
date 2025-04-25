@@ -1,4 +1,4 @@
-package com.github.ariadineamaral.ms_pedido.entities.dto;
+package com.github.ariadineamaral.ms_pedido.dto;
 
 import com.github.ariadineamaral.ms_pedido.entities.ItemDoPedido;
 import com.github.ariadineamaral.ms_pedido.entities.Pedido;
@@ -11,7 +11,6 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

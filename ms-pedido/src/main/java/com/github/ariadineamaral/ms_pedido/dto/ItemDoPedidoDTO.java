@@ -1,4 +1,4 @@
-package com.github.ariadineamaral.ms_pedido.entities.dto;
+package com.github.ariadineamaral.ms_pedido.dto;
 
 import com.github.ariadineamaral.ms_pedido.entities.ItemDoPedido;
 import jakarta.persistence.Column;
