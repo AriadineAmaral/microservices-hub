@@ -2,10 +2,13 @@ package com.github.ariadineamaral.ms_pedido.controller;
 
 import com.github.ariadineamaral.ms_pedido.dto.PedidoDTO;
 import com.github.ariadineamaral.ms_pedido.service.PedidoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -27,6 +30,32 @@ public class PedidoController {
     public ResponseEntity<PedidoDTO> findById(@PathVariable Long id) {
         PedidoDTO dto = service.getById(id);
         return ResponseEntity.ok(dto);
+    }
+
+    @PostMapping
+    public ResponseEntity<PedidoDTO> createPedido(@Valid @RequestBody PedidoDTO dto){
+        dto = service.savePedido(dto);
+        URI uri = ServletUriComponentsBuilder
+                .fromCurrentRequestUri()
+                .path("/{id}")
+                .buildAndExpand(dto.getId())
+                .toUri();
+        return ResponseEntity.created(uri).body(dto);
+    }
+
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PedidoDTO> updatePedido(@PathVariable Long id, @Valid @RequestBody PedidoDTO dto){
+
+        dto = service.updatePedido(id, dto);
+        return ResponseEntity.ok(dto);
+    }
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePedidoById(@PathVariable Long id){
+        service.deletePedido(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

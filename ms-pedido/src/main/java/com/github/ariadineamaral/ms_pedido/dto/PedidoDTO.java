@@ -23,9 +23,7 @@ public class PedidoDTO {
 
     private Long id;
 
-    @NotEmpty(message = "CPF requerido")
-    @Size(min = 11, max = 14, message = "O CPF deve ter entre 11 e 14 caracteres")
-    private Long cpf;
+    private String cpf;
 
     @NotEmpty(message = "Nome requerido")
     @Size(min = 3, max = 100, message = "O nome deve ter entre 3 e 100 caracteres")
@@ -36,11 +34,12 @@ public class PedidoDTO {
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    @NotEmpty(message = "Deve ter pelo menos um item no pedido")
     private List<@Valid ItemDoPedidoDTO> itens = new ArrayList<>();
 
     public PedidoDTO(Pedido entity) {
         id = entity.getId();
-        cpf = entity.getId();
+        cpf = entity.getCpf();
         nome = entity.getNome();
         data = entity.getData();
         status = entity.getStatus();
